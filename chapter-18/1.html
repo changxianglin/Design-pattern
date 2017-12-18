@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chapter-18</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    var log = console.log.bind(console)
+    // 1.代理模式
+    var myImage = (function() {
+      var imageNode = document.createElement('img')
+      document.body.appendChild(imageNode)
+      return {
+        setSrc: function(src) {
+          imageNode.src = src
+        }
+      }
+    })()
+
+    var proxyImage = (function(){
+      var img = new Image
+      img.onload = function() {
+        myImage.setSrc(this.src)
+      }
+      return {
+        setSrc: function(src) {
+          myImage.setSrc('')
+          img.src = src
+        }
+      }
+    })()
+
+    proxyImage.setSrc('')
+    </script>
+  </body>
+</html>

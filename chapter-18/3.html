@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>3</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var log = console.log.bind(console)
+      // 单例模式
+      var createLoginLayer = (function() {
+        var div
+        return function() {
+          if ( !div) {
+            div = document.createElement('div')
+            div.innerHTML = '我是登录浮窗'
+            div.style.display = 'none'
+            document.body.appendDiv(div)
+          }
+        }
+        return div
+      })()
+
+      var getSingle = function(fn) {
+        var result
+        return function() {
+          return result || (result = fn.apply(this, arguments))
+        }
+      }
+
+      var createLoginLayer = function() {
+        var div = document.createElement('dv')
+        div.innerHTML = '我是登录浮窗'
+        document.body.appendChild(div)
+        return div
+      }
+
+      var createLoginLayer = getSingle(createLoginLayer)
+
+      var loginLayer1 = createLoginLayer()
+      var loginLayer2 = createLoginLayer()
+
+      alert(loginLayer1 === loginLayer2)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    var log = console.log.bind(console)
+    // 2.迭代器模式
+    var appendDiv = function(data) {
+      for (var i = 0; i < data.length; i++) {
+        var div = document.createElement('div')
+        div.innerHTML = data[i]
+        document.body.appendChild(div)
+      }
+    }
+
+    // appendDiv([1, 2, 3, 4, 5, 6])
+
+    var isArraylike = function(obj) {
+      if ((obj.length != undefined) && (typeof(obj) === "object") ) {
+        // log(1)
+        return true
+      }
+    }
+
+    var each = function(obj, callback) {
+      var value
+      var i = 0
+      var length = obj.length
+      var isArray = isArraylike(obj)
+
+      if (isArray) {
+        for (var i = 0; i < length; i++) {
+          callback.call(obj[i], i, obj[i])
+        }
+      } else {
+        for (i in obj) {
+          value = callback.call(obj[i], i, obj[i])
+        }
+      }
+      return obj
+    }
+
+    var appendDiv = function(data) {
+      each(data, function(i, n) {
+        var div = document.createElement('div')
+        div.innerHTML = n
+        document.body.appendChild(div)
+      })
+    }
+
+    appendDiv([1, 2, 3, 4, 5, 6])
+    appendDiv({a: 1, b: 2, c: 3, d: 4})
+    </script>
+  </body>
+</html>
