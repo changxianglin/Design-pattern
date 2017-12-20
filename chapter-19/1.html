@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>index</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+    // 减少对象之间的联系
+      var fun = function() {
+        a1()
+        a2()
+      }
+      var bar = function() {
+        b1()
+        b2()
+      }
+      var run = function() {
+        fun()
+        bar()
+      }
+
+      run()
+    </script>
+  </body>
+</html>
